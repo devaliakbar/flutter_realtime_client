@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package message;
+
+import "proto/user.proto";
+
+message MessageRoom {
+  string id = 1;
+  string room_name = 2;
+  bool is_one_to_one = 3;
+  repeated user.User members = 4;
+}
+
+message CreateMessageRoomRequest {
+  string room_name = 1;
+  bool is_one_to_one = 2;
+  /// Users id
+  repeated string members = 3;
+}
+
+message GetMessageRoomsRequest {
+  string search = 1;
+  int32 skip = 2;
+  int32 take = 3;
+  bool get_group_members = 4;
+}
+message GetMessageRoomsResponse { repeated MessageRoom rooms = 1; }
+
+message GetMessageRoomDetailsRequest { string room_id = 1; }
+
+message Message {
+  string id = 1;
+  string room_id = 2;
+  user.User sender = 3;
+  int64 time = 4;
+  string body = 5;
+}
+
+message SendMessageRequest {
+  string room_id = 1;
+  string body = 2;
+}
+
+message GetMessagesRequest {
+  string room_id = 1;
+  int32 skip = 2;
+  int32 take = 3;
+}
+message GetMessagesResponse { repeated Message messages = 1; }
+
+message ListenToNewMessageRequest {}
+message ListenToNewMessageResponse { Message newMessage = 1; }
+
+service MessageService {
+  rpc CreateMessageRoom(CreateMessageRoomRequest) returns (MessageRoom) {}
+  rpc GetMessageRooms(GetMessageRoomsRequest)
+      returns (GetMessageRoomsResponse) {}
+  rpc GetMessageRoomDetails(GetMessageRoomDetailsRequest)
+      returns (MessageRoom) {}
+  rpc SendMessage(SendMessageRequest) returns (Message) {}
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse) {}
+  rpc ListenToNewMessage(ListenToNewMessageRequest)
+      returns (stream ListenToNewMessageResponse) {}
+}

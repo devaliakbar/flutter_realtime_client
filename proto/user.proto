@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package user;
+
+message User {
+  string id = 1;
+  string full_name = 2;
+  string email = 3;
+}
+
+message SignUpRequest {
+  User user = 1;
+  string password = 2;
+}
+
+message SignUpResponse {
+  User user = 1;
+  string jwt_token = 2;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message GetUsersRequest {
+  string search = 1;
+  int32 skip = 2;
+  int32 take = 3;
+}
+message GetUsersResponse { repeated User users = 1; }
+
+message UpdateUserRequest {
+  string full_name = 1;
+  string email = 2;
+  string password = 3;
+}
+
+service UserService {
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
+  rpc Login(LoginRequest) returns (SignUpResponse) {}
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {}
+  rpc UpdateUser(UpdateUserRequest) returns (User) {}
+}
