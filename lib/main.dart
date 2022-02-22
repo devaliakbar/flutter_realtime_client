@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_realtime/core/helper/track_context.dart';
 import 'package:flutter_realtime/features/auth/presentation/screens/login.dart';
 import 'package:flutter_realtime/features/auth/presentation/screens/sign_up.dart';
 import 'package:flutter_realtime/features/auth/provider/app_state.dart';
 import 'package:flutter_realtime/features/message/presentation/screens/message_home.dart';
+import 'package:flutter_realtime/features/message/provider/message_provider.dart';
 import 'package:flutter_realtime/features/welcome/presentation/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -18,9 +20,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppState()),
+        ChangeNotifierProvider(create: (_) => MessageProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        key: TrackContext.key,
         routes: {
           SplashScreen.myRoute: (BuildContext context) => const SplashScreen(),
           Login.myRoute: (BuildContext context) => const Login(),

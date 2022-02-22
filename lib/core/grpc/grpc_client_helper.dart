@@ -1,4 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_realtime/core/helper/track_context.dart';
+import 'package:flutter_realtime/features/auth/presentation/screens/login.dart';
+import 'package:flutter_realtime/features/auth/provider/app_state.dart';
 import 'package:grpc/grpc.dart';
+import 'package:provider/provider.dart';
 
 class GrpcClientHelper {
   static const String defaultPath = "0.0.0.0";
@@ -13,5 +18,22 @@ class GrpcClientHelper {
         credentials: ChannelCredentials.insecure(),
       ),
     );
+  }
+
+  static CallOptions getAuthOptions({bool goLoginIfInvalidToken = true}) {
+    final String? token =
+        Provider.of<AppState>(TrackContext.getCurrentContext()!, listen: false)
+            .jwtToken;
+
+    if (token == null) {
+      if (goLoginIfInvalidToken) {
+        Navigator.of(TrackContext.getCurrentContext()!).pushNamedAndRemoveUntil(
+            Login.myRoute, (Route<dynamic> route) => false);
+      }
+
+      throw "Authentication required";
+    }
+
+    return CallOptions(metadata: {"authorization": token});
   }
 }
