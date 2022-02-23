@@ -53,8 +53,10 @@ class _MessageHomeState extends State<MessageHome> {
               itemBuilder: (BuildContext context, int index) => ListTile(
                 title: Text(messageProvider.rooms[index].roomName),
                 onTap: () {},
-                leading: const CircleAvatar(
-                  child: Icon(Icons.person),
+                leading: CircleAvatar(
+                  child: Icon(messageProvider.rooms[index].isOneToOne
+                      ? Icons.person
+                      : Icons.groups),
                   backgroundColor: Colors.white,
                 ),
               ),
