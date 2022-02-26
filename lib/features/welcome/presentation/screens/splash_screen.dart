@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
-  static const String myRoute = '/';
+  static const String routeName = '/';
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkToken() async {
     await Future.delayed(const Duration(seconds: 2));
 
-    String route = Login.myRoute;
+    String route = Login.routeName;
 
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
           appState.setUser(User.fromJson(jsonDecode(userInfo)));
           appState.setJwtToken(jwt);
 
-          route = MessageHome.myRoute;
+          route = MessageHome.routeName;
         }
       }
     } catch (_) {}

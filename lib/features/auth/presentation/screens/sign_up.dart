@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
-  static const String myRoute = '/sign_up';
+  static const String routeName = '/sign_up';
 
   const SignUp({Key? key}) : super(key: key);
 
@@ -143,7 +143,7 @@ class _SignUpState extends State<SignUp> {
       await prefs.setString('user_info', jsonEncode(usr));
 
       Navigator.of(context).pushNamedAndRemoveUntil(
-          MessageHome.myRoute, (Route<dynamic> route) => false);
+          MessageHome.routeName, (Route<dynamic> route) => false);
     } catch (e) {
       String err = "Failed to signup";
       if (e is GrpcError) {

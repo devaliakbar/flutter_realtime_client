@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_realtime/features/message/presentation/screens/message_screen.dart';
 import 'package:flutter_realtime/features/message/presentation/widgets/message_home/message_home_appbar.dart';
 import 'package:flutter_realtime/features/message/provider/message_provider.dart';
 import 'package:provider/provider.dart';
 
 class MessageHome extends StatefulWidget {
-  static const String myRoute = '/message_home';
+  static const String routeName = '/message_home';
 
   const MessageHome({Key? key}) : super(key: key);
 
@@ -52,7 +53,10 @@ class _MessageHomeState extends State<MessageHome> {
               itemCount: messageProvider.rooms.length,
               itemBuilder: (BuildContext context, int index) => ListTile(
                 title: Text(messageProvider.rooms[index].roomName),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, MessageScreen.routeName,
+                      arguments: messageProvider.rooms[index]);
+                },
                 leading: CircleAvatar(
                   child: Icon(messageProvider.rooms[index].isOneToOne
                       ? Icons.person

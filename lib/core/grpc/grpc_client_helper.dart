@@ -31,7 +31,7 @@ class GrpcClientHelper {
         Future.delayed(const Duration(seconds: 1)).then((value) => null).then(
             (value) => Navigator.of(TrackContext.getCurrentContext())
                 .pushNamedAndRemoveUntil(
-                    Login.myRoute, (Route<dynamic> route) => false));
+                    Login.routeName, (Route<dynamic> route) => false));
       }
 
       throw "Authentication required";

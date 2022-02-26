@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
-  static const String myRoute = '/login';
+  static const String routeName = '/login';
 
   const Login({Key? key}) : super(key: key);
 
@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, SignUp.myRoute);
+                      Navigator.pushNamed(context, SignUp.routeName);
                     },
                     child: const Text("Sign up"),
                   ),
@@ -137,7 +137,7 @@ class _LoginState extends State<Login> {
       await prefs.setString('user_info', jsonEncode(usr));
 
       Navigator.of(context).pushNamedAndRemoveUntil(
-          MessageHome.myRoute, (Route<dynamic> route) => false);
+          MessageHome.routeName, (Route<dynamic> route) => false);
     } catch (e) {
       String err = "Failed to login";
       if (e is GrpcError) {

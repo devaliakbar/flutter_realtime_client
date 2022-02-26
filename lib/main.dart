@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_realtime/core/helper/track_context.dart';
-import 'package:flutter_realtime/features/auth/presentation/screens/login.dart';
-import 'package:flutter_realtime/features/auth/presentation/screens/sign_up.dart';
+import 'package:flutter_realtime/core/route/app_router.dart';
 import 'package:flutter_realtime/features/auth/provider/app_state.dart';
-import 'package:flutter_realtime/features/message/presentation/screens/message_home.dart';
 import 'package:flutter_realtime/features/message/provider/message_provider.dart';
-import 'package:flutter_realtime/features/welcome/presentation/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,12 +22,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorKey: TrackContext.key,
-        routes: {
-          SplashScreen.myRoute: (BuildContext context) => const SplashScreen(),
-          Login.myRoute: (BuildContext context) => const Login(),
-          SignUp.myRoute: (BuildContext context) => const SignUp(),
-          MessageHome.myRoute: (BuildContext context) => const MessageHome(),
-        },
+        onGenerateRoute: AppRouter.onGenerateRoute,
         builder: (BuildContext context, final child) => Stack(
           children: [
             child!,

@@ -19,7 +19,7 @@ class MessageHomeAppbar extends StatelessWidget with PreferredSizeWidget {
               await storage.delete(key: "jwt");
 
               Navigator.of(context).pushNamedAndRemoveUntil(
-                  Login.myRoute, (Route<dynamic> route) => false);
+                  Login.routeName, (Route<dynamic> route) => false);
             },
             icon: const Icon(Icons.power))
       ],
