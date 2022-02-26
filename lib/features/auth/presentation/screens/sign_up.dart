@@ -128,6 +128,7 @@ class _SignUpState extends State<SignUp> {
           password: password));
 
       final Map<String, dynamic> usr = {
+        "user_id": response.user.id,
         "full_name": response.user.fullName,
         "email": response.user.email
       };

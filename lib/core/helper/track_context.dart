@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TrackContext {
-  static final GlobalKey key = GlobalKey();
+  static final GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
 
-  static BuildContext? getCurrentContext() {
-    return key.currentContext;
+  static BuildContext getCurrentContext() {
+    return key.currentContext!;
   }
 }

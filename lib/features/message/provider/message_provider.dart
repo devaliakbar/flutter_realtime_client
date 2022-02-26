@@ -21,7 +21,7 @@ class MessageProvider extends ChangeNotifier {
     try {
       final channel = GrpcClientHelper.getChannel();
       final stub = MessageServiceClient(channel,
-          options: GrpcClientHelper.getAuthOptions());
+          options: await GrpcClientHelper.getAuthOptions());
 
       final res = await stub.getMessageRooms(GetMessageRoomsRequest());
 

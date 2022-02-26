@@ -122,6 +122,7 @@ class _LoginState extends State<Login> {
           .login(pbgrpc.LoginRequest(email: email, password: password));
 
       final Map<String, dynamic> usr = {
+        "user_id": response.user.id,
         "full_name": response.user.fullName,
         "email": response.user.email
       };

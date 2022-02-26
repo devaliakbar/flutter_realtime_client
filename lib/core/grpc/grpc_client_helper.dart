@@ -20,15 +20,18 @@ class GrpcClientHelper {
     );
   }
 
-  static CallOptions getAuthOptions({bool goLoginIfInvalidToken = true}) {
+  static Future<CallOptions> getAuthOptions(
+      {bool navigateLoginIfInvalidToken = true}) async {
     final String? token =
-        Provider.of<AppState>(TrackContext.getCurrentContext()!, listen: false)
+        Provider.of<AppState>(TrackContext.getCurrentContext(), listen: false)
             .jwtToken;
 
     if (token == null) {
-      if (goLoginIfInvalidToken) {
-        Navigator.of(TrackContext.getCurrentContext()!).pushNamedAndRemoveUntil(
-            Login.myRoute, (Route<dynamic> route) => false);
+      if (navigateLoginIfInvalidToken) {
+        Future.delayed(const Duration(seconds: 1)).then((value) => null).then(
+            (value) => Navigator.of(TrackContext.getCurrentContext())
+                .pushNamedAndRemoveUntil(
+                    Login.myRoute, (Route<dynamic> route) => false));
       }
 
       throw "Authentication required";

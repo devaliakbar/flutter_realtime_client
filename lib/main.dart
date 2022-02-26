@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        key: TrackContext.key,
+        navigatorKey: TrackContext.key,
         routes: {
           SplashScreen.myRoute: (BuildContext context) => const SplashScreen(),
           Login.myRoute: (BuildContext context) => const Login(),
