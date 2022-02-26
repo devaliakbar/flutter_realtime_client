@@ -127,6 +127,7 @@ class _LoginState extends State<Login> {
       };
 
       appState.setUser(User.fromJson(usr));
+      appState.setJwtToken(response.jwtToken);
 
       const storage = FlutterSecureStorage();
       await storage.write(key: "jwt", value: response.jwtToken);
