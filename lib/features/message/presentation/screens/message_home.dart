@@ -22,6 +22,12 @@ class _MessageHomeState extends State<MessageHome> {
   }
 
   @override
+  void dispose() {
+    Provider.of<MessageProvider>(context, listen: false).exit();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MessageHomeAppbar(),
