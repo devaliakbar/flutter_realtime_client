@@ -14,16 +14,19 @@ class MessageHome extends StatefulWidget {
 }
 
 class _MessageHomeState extends State<MessageHome> {
+  late final MessageProvider _messageProvider;
+
   @override
   void initState() {
     super.initState();
 
-    Provider.of<MessageProvider>(context, listen: false).init();
+    _messageProvider = Provider.of<MessageProvider>(context, listen: false);
+    _messageProvider.init();
   }
 
   @override
   void dispose() {
-    Provider.of<MessageProvider>(context, listen: false).exit();
+    _messageProvider.exit();
     super.dispose();
   }
 
